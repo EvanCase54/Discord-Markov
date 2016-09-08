@@ -45,6 +45,8 @@ altcommand = ".mk"
 
 ################
 
+currentavatar = defaultavatar
+
 def markov(model):
     m = None
     while m == None:
@@ -97,27 +99,29 @@ async def sendmarkov(markov, message):
             except:
                 print("Tried to change nickname on {0.server.name}, failed.".format(message))
 
-        if markov['avatar']:
+        if markov['avatar'] and currentavatar != markov['avatar']:
             try:
                 with open(textdir+markov['avatar']) as a:
                     avvy = a.read()
                 await client.change_profile(avatar=avvy)
+
+                currentavatar = markov['avatar']
             except:
                 print("Tried to change avatar, failed.")
+
+        elif currentavatar != defaultavatar
+            try:
+                with open(defaultavatar) as a:
+                    avvy = a.read()
+                await client.change_profile(avatar=avvy)
+            except:
+                pass
 
         await client.send_message(message.channel, msg)
 
         if markov['username']:
             try:
                await client.change_nickname(message.server.me, oldname)
-            except:
-                pass
-
-        if markov['avatar']:
-            try:
-                with open(defaultavatar) as a:
-                    avvy = a.read()
-                await client.change_profile(avatar=avvy)
             except:
                 pass
 
