@@ -55,8 +55,15 @@ def markov(model):
 
 def markovcache():
     for c in config:
+
+        if c['username']:
+            markovname = c['username']
+        else:
+            markovname = c['filename'].strip('.txt')
+
+        print("Generating cache for {0}.".format(markovname))
+        
         while len(c['cache']) <= 10:
-            print("Generating cache for {0}.".format(c['username']))
             m = markov(c['model'])
             c['cache'].append(m)
 
