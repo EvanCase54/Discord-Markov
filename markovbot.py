@@ -77,11 +77,16 @@ async def sendmarkov(markov, message):
     if len(markov['cache']) == 0:
         markovcache()
 
+    if markov['username']:
+        markovname = markov['username']
+    else:
+        markovname = markov['filename'].strip('.txt')
+
     msg = c['cache'].pop()
 
     if message.channel.is_private:
         await client.send_message(message.channel, msg)
-        print("PM with {0.author}\n{1}:{2}\n".format(message, markov['username'], msg[1:]))
+        print("PM with {0.author}\n{1}:{2}\n".format(message, markovname, msg[1:]))
 
     else:
         oldname = message.server.me.display_name
@@ -116,7 +121,7 @@ async def sendmarkov(markov, message):
             except:
                 pass
 
-        print("{0.server.name}#{0.channel.name}\n{1}:{2}\n".format(message, markov['username'], msg[1:]))
+        print("{0.server.name}#{0.channel.name}\n{1}:{2}\n".format(message, markovname, msg[1:]))
 
     markovcache()
 
