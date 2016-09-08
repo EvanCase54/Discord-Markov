@@ -9,18 +9,16 @@ import asyncio
 # Set this to the path where your .txts are. This should be a folder that contains .txt files with the name of the chain/command
 textdir = "logs/"
 
-# Dictonaries with the files and options
+# A list of dictionaries, each one a markov.
 # Filename is the name of the file within the above directory
 # Command is the argument used for calling this markov
 # Username is the name of the user (for changing nicknames). If it is set to None, it will not change the nickname
 # Avatar is the file name of the avatar for this user. If it is set to None, it will not change the avatar. It looks for the avatar in the same directory as the logs
 # Newline set to False if you want it to seperate sentences based on periods instead of newlines
-# Model shouldn't be touched
-# Cache shouldn't be touched
 config = [
   {
     'filename': 'text.txt',
-    'command': 'test',
+    'command': 'text',
     'username': None,
     # Example to set the nickname:
     # 'username': 'Test User',
@@ -28,8 +26,6 @@ config = [
     # Example to set the avatar:
     # 'avatar': 'test.png'
     'newline': True,
-    'model': None,
-    'cache': []
   }
  ]
 
@@ -47,6 +43,10 @@ altcommand = ".mk"
 
 currentavatar = defaultavatar
 
+for c in config:
+    c['model'] = None
+    c['cache'] = []
+
 def markov(model):
     m = None
     while m == None:
@@ -62,7 +62,7 @@ def markovcache():
             markovname = c['filename'].strip('.txt')
 
         print("Generating cache for {0}.".format(markovname))
-        
+
         while len(c['cache']) <= 10:
             m = markov(c['model'])
             c['cache'].append(m)
