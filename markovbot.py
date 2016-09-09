@@ -32,7 +32,7 @@ config = [
 # Default avatar name
 defaultavatar = 'avatar.png'
 
-# Bot token goes here
+# Bot token goes here (in case you were wondering, no, this sample token is not valid.)
 bottoken = "MTg3ODE4MDI4NjQwMTA4NTQ0.CrGbBQ.syQBhtEptt9mNSGcKG0O2a_sres"
 
 # Set the commands to trigger a markov. The second one is optional
