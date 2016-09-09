@@ -154,11 +154,12 @@ async def on_message(message):
             await sendmarkov(config[0], message)
             return
 
-        arg = message.content.lower().split()[1]
+        if len(message.content.split()) > 1:
+            arg = message.content.lower().split()[1]
 
-        for c in config:
-            if c['command'] == arg:
-                await sendmarkov(c, message)
-
+            for c in config:
+                if c['command'] == arg:
+                    await sendmarkov(c, message)
+                    return
 
 client.run(bottoken)
