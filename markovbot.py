@@ -116,7 +116,7 @@ async def sendmarkov(markov, message):
             except:
                 print("Tried to change avatar, failed.")
 
-        elif currentavatar != defaultavatar
+        elif currentavatar != defaultavatar:
             try:
                 with open(defaultavatar) as a:
                     avvy = a.read()
